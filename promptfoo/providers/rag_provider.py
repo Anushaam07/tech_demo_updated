@@ -16,10 +16,10 @@ Usage in promptfoo.yaml:
       - python: providers/rag_provider.py
 
 Environment Variables Required:
-    - AZURE_API_KEY: Azure OpenAI API key
+    - AZURE_OPENAI_API_KEY: Azure OpenAI API key
     - AZURE_OPENAI_ENDPOINT: Azure OpenAI endpoint URL
-    - AZURE_OPENAI_API_VERSION: API version (default: 2024-12-01-preview)
-    - AZURE_DEPLOYMENT_NAME: Deployment name for chat model (default: gpt-4o-mini)
+    - RAG_AZURE_OPENAI_API_VERSION: API version (default: 2024-12-01-preview)
+    - AZURE_OPENAI_DEPLOYMENT: Deployment name for chat model (default: gpt-4o-mini)
     - RAG_API_URL: Local RAG API URL (default: http://localhost:8000)
     - RAG_FILE_ID: File ID to query against in the RAG system
     - RAG_TOP_K: Number of chunks to retrieve (default: 4)
@@ -63,17 +63,17 @@ class RAGConfig:
     def from_env(cls) -> "RAGConfig":
         """Load configuration from environment variables."""
         return cls(
-            azure_api_key=os.environ.get("AZURE_API_KEY", ""),
+            azure_api_key=os.environ.get("AZURE_OPENAI_API_KEY", ""),
             azure_endpoint=os.environ.get(
                 "AZURE_OPENAI_ENDPOINT",
                 "https://ai-40mini.cognitiveservices.azure.com/"
             ).rstrip("/"),
             azure_api_version=os.environ.get(
-                "AZURE_OPENAI_API_VERSION",
+                "RAG_AZURE_OPENAI_API_VERSION",
                 "2024-12-01-preview"
             ),
             azure_deployment_name=os.environ.get(
-                "AZURE_DEPLOYMENT_NAME",
+                "AZURE_OPENAI_DEPLOYMENT",
                 "gpt-4o-mini"
             ),
             rag_api_url=os.environ.get("RAG_API_URL", "http://localhost:8000"),
@@ -118,7 +118,7 @@ Context from retrieved documents:
         """Validate that required configuration is present."""
         if not self.config.azure_api_key:
             logger.warning(
-                "AZURE_API_KEY not set. LLM generation will fail. "
+                "AZURE_OPENAI_API_KEY not set. LLM generation will fail. "
                 "Set this environment variable to enable full RAG pipeline."
             )
         if not self.config.rag_file_id:

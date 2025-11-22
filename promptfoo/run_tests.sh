@@ -23,14 +23,19 @@ NC='\033[0m' # No Color
 
 # Script directory
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
 cd "$SCRIPT_DIR"
 
-# Load environment variables
+# Load environment variables from parent directory's .env first
+if [ -f "$PROJECT_ROOT/.env" ]; then
+    echo -e "${BLUE}Loading environment variables from project root .env${NC}"
+    export $(cat "$PROJECT_ROOT/.env" | grep -v '^#' | grep -v '^$' | xargs)
+fi
+
+# Then load from local .env if it exists (for overrides)
 if [ -f .env ]; then
-    echo -e "${BLUE}Loading environment variables from .env${NC}"
-    export $(cat .env | grep -v '^#' | xargs)
-else
-    echo -e "${YELLOW}Warning: .env file not found. Using system environment variables.${NC}"
+    echo -e "${BLUE}Loading environment variables from promptfoo/.env (overrides)${NC}"
+    export $(cat .env | grep -v '^#' | grep -v '^$' | xargs)
 fi
 
 # Check prerequisites
@@ -56,10 +61,17 @@ check_prerequisites() {
     fi
 
     # Check required environment variables
-    if [ -z "$AZURE_API_KEY" ]; then
-        echo -e "${RED}Error: AZURE_API_KEY is not set${NC}"
-        echo "Please set it in .env file or export it"
+    if [ -z "$AZURE_OPENAI_API_KEY" ]; then
+        echo -e "${RED}Error: AZURE_OPENAI_API_KEY is not set${NC}"
+        echo "Please set it in your .env file"
         exit 1
+    fi
+
+    # Check RAG_FILE_ID
+    if [ -z "$RAG_FILE_ID" ]; then
+        echo -e "${YELLOW}Warning: RAG_FILE_ID is not set${NC}"
+        echo "Add RAG_FILE_ID=your-file-id to your .env file"
+        echo "Using empty file_id - tests may not retrieve documents"
     fi
 
     # Check RAG API availability
@@ -140,11 +152,13 @@ show_help() {
     echo "  $0 redteam       # Run security tests"
     echo "  $0 all           # Run everything"
     echo ""
-    echo "Environment Variables:"
-    echo "  AZURE_API_KEY           Azure OpenAI API key (required)"
-    echo "  AZURE_OPENAI_ENDPOINT   Azure endpoint URL"
-    echo "  RAG_API_URL             Local RAG API URL (default: http://localhost:8000)"
-    echo "  RAG_FILE_ID             Document file ID to test"
+    echo "Environment Variables (from .env):"
+    echo "  AZURE_OPENAI_API_KEY           Azure OpenAI API key (required)"
+    echo "  AZURE_OPENAI_ENDPOINT          Azure endpoint URL"
+    echo "  AZURE_OPENAI_DEPLOYMENT        Model deployment name"
+    echo "  RAG_AZURE_OPENAI_API_VERSION   API version"
+    echo "  RAG_FILE_ID                    Document file ID to test"
+    echo "  RAG_API_URL                    Local RAG API URL (default: http://localhost:8000)"
 }
 
 # Main

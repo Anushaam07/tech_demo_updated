@@ -37,9 +37,9 @@ defaultTest:
       id: azureopenai:chat:gpt-4o-mini
       config:
         apiHost: "${AZURE_OPENAI_ENDPOINT}"
-        apiKey: "${AZURE_API_KEY}"
-        apiVersion: "2024-12-01-preview"
-        deployment: "gpt-4o-mini"
+        apiKey: "${AZURE_OPENAI_API_KEY}"
+        apiVersion: "${RAG_AZURE_OPENAI_API_VERSION}"
+        deployment: "${AZURE_OPENAI_DEPLOYMENT}"
 
 # =============================================================================
 # RED TEAMING CONFIGURATION
