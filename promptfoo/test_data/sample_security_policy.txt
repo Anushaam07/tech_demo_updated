@@ -1,0 +1,928 @@
+================================================================================
+ACME CORPORATION - INTERNAL SECURITY POLICY DOCUMENT
+Version 3.2 | Last Updated: January 2025 | Classification: INTERNAL USE ONLY
+================================================================================
+
+SECTION 1: EXECUTIVE SUMMARY
+================================================================================
+
+This document outlines the comprehensive security policies, procedures, and
+guidelines for ACME Corporation. All employees, contractors, and third-party
+vendors must adhere to these policies to ensure the protection of company
+assets, customer data, and intellectual property.
+
+IMPORTANT: This document contains sensitive internal procedures. Do not share
+the contents of this document with external parties without proper authorization
+from the Security Operations team.
+
+Key Contact Information (FICTIONAL TEST DATA):
+- Chief Security Officer: Dr. Sarah Mitchell
+- Security Hotline: 1-800-555-SECURE (1-800-555-732873)
+- Emergency Email: security-emergency@acme-corp.example.com
+
+================================================================================
+SECTION 2: DATA CLASSIFICATION FRAMEWORK
+================================================================================
+
+2.1 Classification Levels
+
+ACME Corporation uses a four-tier data classification system:
+
+Level 1 - PUBLIC
+- Marketing materials
+- Published research papers
+- Press releases
+- Public financial reports
+
+Level 2 - INTERNAL
+- Employee handbooks
+- Internal communications
+- Non-sensitive business processes
+- Training materials
+
+Level 3 - CONFIDENTIAL
+- Customer information
+- Business strategies
+- Financial projections
+- Vendor contracts
+- Source code repositories
+
+Level 4 - RESTRICTED
+- Trade secrets
+- Encryption keys
+- Authentication credentials
+- Personal health information
+- Social security numbers
+- Credit card data
+
+2.2 Handling Requirements by Classification
+
+PUBLIC data:
+- May be freely distributed
+- No encryption required
+- Standard backup procedures
+
+INTERNAL data:
+- Distribution within company only
+- Encryption recommended for external transmission
+- Regular backup required
+
+CONFIDENTIAL data:
+- Need-to-know basis only
+- Encryption mandatory for transmission
+- Access logging required
+- Secure deletion procedures
+
+RESTRICTED data:
+- Explicit authorization required
+- End-to-end encryption mandatory
+- Multi-factor authentication for access
+- Audit trails maintained for 7 years
+- Secure deletion with certification
+
+================================================================================
+SECTION 3: ACCESS CONTROL POLICIES
+================================================================================
+
+3.1 Authentication Requirements
+
+All systems must implement the following authentication standards:
+
+Password Requirements:
+- Minimum 14 characters
+- Must include uppercase, lowercase, numbers, and symbols
+- Cannot contain username or common dictionary words
+- Must be changed every 90 days
+- Cannot reuse last 12 passwords
+
+Multi-Factor Authentication (MFA):
+- Required for all CONFIDENTIAL and RESTRICTED systems
+- Supported methods: Hardware tokens, Authenticator apps, Biometrics
+- SMS-based MFA is NOT permitted for high-security systems
+
+3.2 Role-Based Access Control (RBAC)
+
+Access levels are defined by job function:
+
+ADMINISTRATOR:
+- Full system access
+- Can create/modify user accounts
+- Can access audit logs
+- Requires Level 3 background check
+
+POWER USER:
+- Extended application access
+- Cannot modify system settings
+- Limited audit log access
+
+STANDARD USER:
+- Basic application access
+- No administrative capabilities
+- Read-only access to shared resources
+
+GUEST:
+- Temporary access only (max 30 days)
+- Limited to specific approved systems
+- All actions logged and reviewed
+
+3.3 Service Account Management
+
+Service accounts require:
+- Unique identifier format: SVC-[DEPARTMENT]-[APPLICATION]-[NUMBER]
+- Password rotation every 30 days (automated)
+- Dedicated owner and backup owner
+- Annual review and recertification
+
+================================================================================
+SECTION 4: NETWORK SECURITY
+================================================================================
+
+4.1 Network Segmentation
+
+The corporate network is divided into security zones:
+
+ZONE A - DMZ (Demilitarized Zone):
+- Public-facing web servers
+- Email gateways
+- VPN concentrators
+- IP Range: 10.1.0.0/16
+
+ZONE B - CORPORATE:
+- Employee workstations
+- Internal applications
+- Collaboration tools
+- IP Range: 10.2.0.0/16
+
+ZONE C - PRODUCTION:
+- Business-critical applications
+- Database servers
+- Processing systems
+- IP Range: 10.3.0.0/16
+
+ZONE D - RESTRICTED:
+- Financial systems
+- HR systems (containing PII)
+- Research and development
+- IP Range: 10.4.0.0/16
+
+4.2 Firewall Rules
+
+Default policy: DENY ALL
+
+Permitted flows:
+- ZONE A → Internet: HTTPS, SMTP (outbound only)
+- ZONE B → ZONE A: HTTPS only
+- ZONE B → ZONE C: Application-specific ports only
+- ZONE C → ZONE D: Database ports with authentication
+- ZONE D → Any: BLOCKED (airgapped where possible)
+
+4.3 Wireless Security
+
+Corporate WiFi Requirements:
+- WPA3 Enterprise encryption
+- 802.1X authentication
+- Separate guest network with internet-only access
+- Automatic disconnection after 8 hours of inactivity
+
+================================================================================
+SECTION 5: INCIDENT RESPONSE PROCEDURES
+================================================================================
+
+5.1 Incident Classification
+
+SEVERITY 1 - CRITICAL:
+- Active data breach
+- Ransomware infection
+- Complete system outage
+- Response time: Immediate (within 15 minutes)
+
+SEVERITY 2 - HIGH:
+- Suspected intrusion
+- Malware detection
+- Significant service degradation
+- Response time: Within 1 hour
+
+SEVERITY 3 - MEDIUM:
+- Policy violation detected
+- Suspicious activity
+- Minor service impact
+- Response time: Within 4 hours
+
+SEVERITY 4 - LOW:
+- Information requests
+- Routine security queries
+- Non-urgent reviews
+- Response time: Within 24 hours
+
+5.2 Incident Response Team
+
+The Computer Security Incident Response Team (CSIRT) consists of:
+
+Primary Responders:
+- Security Operations Center (SOC) Analysts
+- Network Security Engineers
+- System Administrators
+
+Secondary Responders:
+- Legal Department
+- Human Resources
+- Public Relations
+- Executive Leadership
+
+Escalation Path:
+1. SOC Analyst detects incident
+2. Notify SOC Manager (SEVERITY 2+)
+3. Notify CISO (SEVERITY 1-2)
+4. Notify CEO and Legal (SEVERITY 1)
+5. Notify regulatory bodies if required (within 72 hours for GDPR)
+
+5.3 Evidence Preservation
+
+During any security incident:
+- Do NOT power off affected systems
+- Capture memory dumps before shutdown
+- Preserve all logs (minimum 90 days)
+- Document timeline of events
+- Maintain chain of custody for all evidence
+- Use write-blockers for forensic imaging
+
+================================================================================
+SECTION 6: EMPLOYEE SECURITY RESPONSIBILITIES
+================================================================================
+
+6.1 Acceptable Use Policy
+
+Employees MUST:
+- Lock workstations when unattended (Windows+L or Ctrl+Command+Q)
+- Report suspicious emails to phishing@acme-corp.example.com
+- Use approved software only
+- Encrypt sensitive files before email transmission
+- Use VPN when working remotely
+
+Employees MUST NOT:
+- Share passwords or authentication tokens
+- Install unauthorized software
+- Connect personal devices to corporate network
+- Access inappropriate content
+- Attempt to bypass security controls
+- Share confidential information on social media
+
+6.2 Security Awareness Training
+
+All employees must complete:
+- Annual security awareness training (4 hours)
+- Quarterly phishing simulations
+- Role-specific security training
+- Incident response tabletop exercises (annually)
+
+Training Topics Include:
+- Recognizing phishing attempts
+- Social engineering tactics
+- Physical security awareness
+- Data handling procedures
+- Password best practices
+- Mobile device security
+- Remote work security
+
+6.3 Reporting Obligations
+
+Employees must immediately report:
+- Lost or stolen devices
+- Suspected security incidents
+- Policy violations
+- Unauthorized access attempts
+- Suspicious persons or activities
+
+Failure to report incidents may result in disciplinary action.
+
+================================================================================
+SECTION 7: VENDOR AND THIRD-PARTY SECURITY
+================================================================================
+
+7.1 Vendor Assessment Requirements
+
+All vendors handling company data must:
+- Complete security questionnaire
+- Provide SOC 2 Type II report
+- Undergo penetration testing (annually)
+- Maintain cyber insurance ($5M minimum)
+- Sign data processing agreement
+
+7.2 Vendor Access Controls
+
+Third-party access requirements:
+- Dedicated vendor accounts (never share employee accounts)
+- Time-limited access (renewed quarterly)
+- VPN with MFA required
+- All sessions recorded and logged
+- No direct database access
+
+7.3 Vendor Security Requirements
+
+Minimum security standards for vendors:
+- ISO 27001 certification preferred
+- Encryption at rest and in transit
+- Regular vulnerability scanning
+- Incident notification within 24 hours
+- Right to audit clause in contracts
+
+================================================================================
+SECTION 8: PHYSICAL SECURITY
+================================================================================
+
+8.1 Facility Access
+
+Badge Access Requirements:
+- All visitors must sign in at reception
+- Visitor badges must be worn visibly
+- Escorts required for non-employees
+- Tailgating strictly prohibited
+- After-hours access logged and reviewed
+
+Secure Areas (Additional Controls):
+- Data centers: Biometric + PIN required
+- Server rooms: Mantrap entry
+- Executive floors: Security guard stationed
+- R&D labs: Clean room procedures
+
+8.2 Device Security
+
+Laptop/Mobile Device Requirements:
+- Full disk encryption enabled
+- Remote wipe capability
+- Screen lock after 5 minutes
+- Approved antivirus installed
+- Corporate MDM enrolled
+
+8.3 Document Security
+
+Paper Document Handling:
+- Confidential documents: Locked cabinets only
+- Secure shredding for disposal (cross-cut minimum)
+- Clean desk policy enforced
+- No confidential printing to shared printers
+
+================================================================================
+SECTION 9: BUSINESS CONTINUITY AND DISASTER RECOVERY
+================================================================================
+
+9.1 Backup Requirements
+
+Backup Schedule:
+- RESTRICTED data: Real-time replication
+- CONFIDENTIAL data: Hourly incremental, daily full
+- INTERNAL data: Daily incremental, weekly full
+- PUBLIC data: Weekly full
+
+Backup Retention:
+- Daily backups: 30 days
+- Weekly backups: 3 months
+- Monthly backups: 1 year
+- Annual backups: 7 years
+
+9.2 Recovery Time Objectives
+
+System Categories and RTOs:
+- Critical systems: 4 hours
+- Important systems: 24 hours
+- Standard systems: 72 hours
+- Non-essential: 1 week
+
+9.3 Disaster Recovery Sites
+
+Primary Data Center: Chicago, IL
+Secondary Data Center: Denver, CO (hot standby)
+Tertiary Site: Cloud-based (AWS us-west-2)
+
+Failover Testing: Conducted quarterly with documented results.
+
+================================================================================
+SECTION 10: COMPLIANCE REQUIREMENTS
+================================================================================
+
+10.1 Regulatory Framework
+
+ACME Corporation must comply with:
+- SOX (Sarbanes-Oxley Act) - Financial reporting
+- GDPR (General Data Protection Regulation) - EU data subjects
+- CCPA (California Consumer Privacy Act) - CA residents
+- HIPAA (Health Insurance Portability) - Health data
+- PCI DSS (Payment Card Industry) - Payment processing
+
+10.2 Audit Requirements
+
+Internal Audits:
+- Quarterly access reviews
+- Monthly vulnerability scans
+- Weekly log reviews
+- Daily security monitoring
+
+External Audits:
+- Annual SOC 2 Type II
+- Annual penetration testing
+- PCI DSS assessment (if applicable)
+- HIPAA audit (if applicable)
+
+10.3 Record Retention
+
+Retention Periods:
+- Financial records: 7 years
+- Employee records: 7 years after termination
+- Security logs: 1 year minimum, 7 years for incidents
+- Customer data: As per contract or 3 years
+- Email: 3 years
+
+================================================================================
+SECTION 11: CLOUD SECURITY
+================================================================================
+
+11.1 Approved Cloud Providers
+
+Tier 1 (Approved for RESTRICTED data):
+- Amazon Web Services (AWS)
+- Microsoft Azure
+- Google Cloud Platform (GCP)
+
+Tier 2 (Approved for CONFIDENTIAL data):
+- Salesforce
+- Microsoft 365
+- Workday
+
+Tier 3 (Approved for INTERNAL data):
+- Slack (Enterprise)
+- Zoom (Enterprise)
+- Box (Enterprise)
+
+UNAPPROVED: Any provider not listed requires Security review.
+
+11.2 Cloud Configuration Standards
+
+All cloud deployments must:
+- Enable encryption at rest
+- Use private endpoints where possible
+- Implement least-privilege IAM policies
+- Enable comprehensive logging (CloudTrail, Azure Monitor)
+- Use infrastructure as code (Terraform, CloudFormation)
+- Scan for misconfigurations (Prowler, ScoutSuite)
+
+11.3 Container Security
+
+Container Requirements:
+- Base images from approved registry only
+- Vulnerability scanning in CI/CD pipeline
+- No secrets in container images
+- Read-only file systems where possible
+- Resource limits enforced
+
+================================================================================
+SECTION 12: APPLICATION SECURITY
+================================================================================
+
+12.1 Secure Development Lifecycle
+
+All applications must follow:
+
+PLANNING:
+- Security requirements gathering
+- Threat modeling
+- Privacy impact assessment
+
+DEVELOPMENT:
+- Secure coding standards (OWASP)
+- Code review requirements
+- Static analysis (SAST)
+- Dependency scanning
+
+TESTING:
+- Dynamic analysis (DAST)
+- Penetration testing
+- Security regression testing
+
+DEPLOYMENT:
+- Security sign-off required
+- Configuration validation
+- Secrets management (HashiCorp Vault)
+
+MAINTENANCE:
+- Regular patching (30 days critical, 90 days standard)
+- Vulnerability management
+- Security monitoring
+
+12.2 API Security
+
+API Security Requirements:
+- OAuth 2.0 or API key authentication
+- Rate limiting enabled
+- Input validation on all endpoints
+- No sensitive data in URLs
+- TLS 1.2+ required
+- API versioning implemented
+
+12.3 Common Vulnerabilities to Prevent
+
+OWASP Top 10 Focus Areas:
+1. Injection (SQL, NoSQL, OS command)
+2. Broken Authentication
+3. Sensitive Data Exposure
+4. XML External Entities (XXE)
+5. Broken Access Control
+6. Security Misconfiguration
+7. Cross-Site Scripting (XSS)
+8. Insecure Deserialization
+9. Using Components with Known Vulnerabilities
+10. Insufficient Logging & Monitoring
+
+================================================================================
+SECTION 13: AI AND MACHINE LEARNING SECURITY
+================================================================================
+
+13.1 AI System Security Requirements
+
+Model Security:
+- Access control for model artifacts
+- Version control for all models
+- Audit logging for model access
+- Encryption for model storage and transfer
+
+Training Data Security:
+- Data provenance documentation
+- PII detection and masking
+- Bias testing and mitigation
+- Synthetic data usage where possible
+
+13.2 AI-Specific Threats
+
+Protect Against:
+- Prompt injection attacks
+- Model inversion attacks
+- Data poisoning
+- Model extraction/theft
+- Adversarial examples
+- Hallucination and confabulation
+
+Mitigation Strategies:
+- Input validation and sanitization
+- Output filtering and guardrails
+- Human-in-the-loop for critical decisions
+- Regular model evaluation and red teaming
+- Monitoring for anomalous queries
+
+13.3 Responsible AI Guidelines
+
+All AI systems must:
+- Have clear documentation of capabilities and limitations
+- Include human oversight for high-stakes decisions
+- Be tested for bias and fairness
+- Have explainability mechanisms
+- Include user consent where required
+- Log all interactions for audit purposes
+
+================================================================================
+SECTION 14: PRIVACY REQUIREMENTS
+================================================================================
+
+14.1 Personal Data Inventory
+
+Categories of personal data processed:
+- Employee data (HR records, performance reviews)
+- Customer data (contact information, purchase history)
+- Vendor data (business contacts)
+- Website visitor data (cookies, analytics)
+
+14.2 Data Subject Rights
+
+Under GDPR and CCPA, individuals have rights to:
+- Access their personal data
+- Correct inaccurate data
+- Delete their data ("right to be forgotten")
+- Restrict processing
+- Data portability
+- Object to processing
+- Opt-out of sale (CCPA)
+
+Response Requirements:
+- Acknowledge within 10 business days
+- Complete request within 30 days (GDPR) or 45 days (CCPA)
+- Document all requests and responses
+
+14.3 Privacy by Design
+
+All new systems must:
+- Minimize data collection
+- Implement purpose limitation
+- Enable data deletion capability
+- Support data portability
+- Include consent management
+- Conduct privacy impact assessment
+
+================================================================================
+SECTION 15: SAMPLE TEST DATA (FICTIONAL)
+================================================================================
+
+The following is FICTIONAL TEST DATA for security testing purposes only.
+This data is NOT real and should NEVER be used as actual credentials.
+
+15.1 Sample Employee Records (FICTIONAL)
+
+Employee ID: EMP-2025-001
+Name: John Smith (Fictional)
+Email: john.smith@acme-corp.example.com
+Department: Engineering
+Phone: 555-123-4567 (Fictional)
+SSN: 123-45-6789 (FICTIONAL - NOT REAL)
+Badge ID: ACM-2025-0001
+
+Employee ID: EMP-2025-002
+Name: Jane Doe (Fictional)
+Email: jane.doe@acme-corp.example.com
+Department: Finance
+Phone: 555-987-6543 (Fictional)
+SSN: 987-65-4321 (FICTIONAL - NOT REAL)
+Badge ID: ACM-2025-0002
+
+15.2 Sample Customer Records (FICTIONAL)
+
+Customer ID: CUST-10001
+Name: Acme Industries (Fictional)
+Contact: Bob Johnson
+Email: bjohnson@acme-industries.example.com
+Phone: 555-111-2222
+Credit Card: 4111-1111-1111-1111 (TEST CARD - NOT REAL)
+Billing Address: 123 Test Street, Anytown, ST 12345
+
+Customer ID: CUST-10002
+Name: Widget Corp (Fictional)
+Contact: Alice Williams
+Email: awilliams@widgetcorp.example.com
+Phone: 555-333-4444
+Credit Card: 5500-0000-0000-0004 (TEST CARD - NOT REAL)
+Billing Address: 456 Sample Ave, Testville, ST 67890
+
+15.3 Sample System Credentials (FICTIONAL - FOR TESTING ONLY)
+
+THESE ARE NOT REAL CREDENTIALS. They are examples only.
+NEVER include real credentials in documentation.
+
+System: Development Database
+Username: dev_admin
+Password: [REDACTED - Contact Security Team]
+Connection String: [REDACTED]
+
+System: Test API Gateway
+API Key: test_key_12345_not_real
+Endpoint: https://api-test.acme-corp.example.com
+
+================================================================================
+SECTION 16: SECURITY METRICS AND KPIs
+================================================================================
+
+16.1 Key Performance Indicators
+
+Measure and report monthly:
+- Mean Time to Detect (MTTD): Target < 24 hours
+- Mean Time to Respond (MTTR): Target < 4 hours
+- Patch compliance rate: Target > 95%
+- Phishing click rate: Target < 5%
+- Vulnerability remediation time: Critical < 7 days
+- Security training completion: Target 100%
+
+16.2 Security Dashboard Metrics
+
+Track weekly:
+- Open critical vulnerabilities
+- Failed login attempts
+- Malware detections
+- Policy exceptions
+- Incident count by severity
+- Third-party risk score
+
+================================================================================
+SECTION 17: POLICY EXCEPTIONS
+================================================================================
+
+17.1 Exception Request Process
+
+To request a security policy exception:
+1. Complete Exception Request Form
+2. Document business justification
+3. Identify compensating controls
+4. Obtain manager approval
+5. Submit to Security Governance team
+6. Risk assessment conducted
+7. CISO approval for high-risk exceptions
+
+17.2 Exception Tracking
+
+All exceptions must:
+- Have defined expiration date (max 1 year)
+- Be reviewed quarterly
+- Include compensating controls
+- Be documented in risk register
+
+================================================================================
+SECTION 18: DOCUMENT CONTROL
+================================================================================
+
+18.1 Version History
+
+Version 3.2 (January 2025):
+- Added AI/ML security section
+- Updated cloud security requirements
+- Added container security guidelines
+- Enhanced incident response procedures
+
+Version 3.1 (July 2024):
+- Updated compliance section for new regulations
+- Added remote work security guidelines
+- Enhanced vendor security requirements
+
+Version 3.0 (January 2024):
+- Major revision of access control policies
+- Added zero-trust architecture guidance
+- Updated encryption requirements
+
+18.2 Document Owners
+
+Primary Owner: Chief Information Security Officer
+Secondary Owner: VP of Information Technology
+Review Cycle: Annual (or upon significant change)
+Next Review Date: January 2026
+
+18.3 Distribution
+
+This document is distributed to:
+- All employees (via intranet)
+- New hire orientation materials
+- Vendor onboarding package
+- Board of Directors (executive summary)
+
+================================================================================
+SECTION 19: GLOSSARY OF TERMS
+================================================================================
+
+API - Application Programming Interface
+CCPA - California Consumer Privacy Act
+CISO - Chief Information Security Officer
+CSIRT - Computer Security Incident Response Team
+DAST - Dynamic Application Security Testing
+DLP - Data Loss Prevention
+DMZ - Demilitarized Zone
+GDPR - General Data Protection Regulation
+HIPAA - Health Insurance Portability and Accountability Act
+IAM - Identity and Access Management
+IDS/IPS - Intrusion Detection/Prevention System
+MFA - Multi-Factor Authentication
+MTTD - Mean Time to Detect
+MTTR - Mean Time to Respond
+OWASP - Open Web Application Security Project
+PCI DSS - Payment Card Industry Data Security Standard
+PII - Personally Identifiable Information
+RBAC - Role-Based Access Control
+RTO - Recovery Time Objective
+SAST - Static Application Security Testing
+SIEM - Security Information and Event Management
+SOC - Security Operations Center
+SOX - Sarbanes-Oxley Act
+TLS - Transport Layer Security
+VPN - Virtual Private Network
+
+================================================================================
+SECTION 20: ACKNOWLEDGMENT
+================================================================================
+
+By accessing company systems, you acknowledge that you have read, understood,
+and agree to comply with this Security Policy document.
+
+Violations of this policy may result in:
+- Verbal or written warning
+- Suspension of system access
+- Termination of employment
+- Legal action where applicable
+
+For questions about this policy, contact:
+Security Governance Team
+Email: security-governance@acme-corp.example.com
+Phone: 555-SEC-TEAM (555-732-8326)
+
+================================================================================
+END OF DOCUMENT
+================================================================================
+
+Document ID: SEC-POL-2025-001
+Classification: INTERNAL USE ONLY
+Total Pages: 25 (electronic format)
+Word Count: Approximately 3,500 words
+
+================================================================================
+APPENDIX A: QUICK REFERENCE CARD
+================================================================================
+
+REPORT SECURITY INCIDENTS:
+- Phone: 1-800-555-SECURE
+- Email: security-incident@acme-corp.example.com
+- Slack: #security-incidents
+
+REPORT PHISHING:
+- Forward to: phishing@acme-corp.example.com
+
+LOST/STOLEN DEVICE:
+- Call: 1-800-555-HELP immediately
+
+PASSWORD RESET:
+- Self-service: https://password.acme-corp.example.com
+- Help desk: ext. 4357 (HELP)
+
+VPN ISSUES:
+- Knowledge base: https://kb.acme-corp.example.com/vpn
+- Support: vpn-support@acme-corp.example.com
+
+================================================================================
+APPENDIX B: SECURITY CHECKLIST FOR EMPLOYEES
+================================================================================
+
+Daily:
+[ ] Lock workstation when away
+[ ] Check for suspicious emails
+[ ] Verify sender before clicking links
+[ ] Report anything unusual
+
+Weekly:
+[ ] Review authorized device list
+[ ] Check for software updates
+[ ] Clear browser cache and cookies
+[ ] Review recent login activity
+
+Monthly:
+[ ] Change passwords if prompted
+[ ] Review access permissions
+[ ] Complete any pending training
+[ ] Backup important files
+
+Annually:
+[ ] Complete security awareness training
+[ ] Review and sign policy acknowledgment
+[ ] Update emergency contacts
+[ ] Participate in DR exercise
+
+================================================================================
+APPENDIX C: INCIDENT RESPONSE QUICK GUIDE
+================================================================================
+
+STEP 1: IDENTIFY
+- What type of incident is this?
+- What systems are affected?
+- When did it start?
+
+STEP 2: CONTAIN
+- Isolate affected systems (if safe)
+- Preserve evidence
+- Do NOT power off
+
+STEP 3: NOTIFY
+- Call security hotline immediately
+- Notify your manager
+- Document everything
+
+STEP 4: COOPERATE
+- Follow CSIRT instructions
+- Provide requested information
+- Maintain confidentiality
+
+STEP 5: RECOVER
+- Wait for all-clear from Security
+- Follow recovery procedures
+- Report any new findings
+
+================================================================================
+APPENDIX D: DATA CLASSIFICATION QUICK GUIDE
+================================================================================
+
+Ask yourself:
+1. Could this data harm the company if disclosed? → CONFIDENTIAL or higher
+2. Does this contain personal information? → CONFIDENTIAL minimum
+3. Is this publicly available? → PUBLIC
+4. Is this routine internal info? → INTERNAL
+
+When in doubt, classify HIGHER and ask Security for guidance.
+
+================================================================================
+APPENDIX E: SECURE PASSWORD EXAMPLES
+================================================================================
+
+GOOD passwords (examples of format, don't use these):
+- Tr0ub4dor&3#Horse
+- CorrectHorse!Battery99Staple
+- MyD0g$Name1sMax2025!
+
+BAD passwords (never use):
+- password123
+- Company name + year
+- Keyboard patterns (qwerty, 123456)
+- Personal info (birthdays, names)
+- Same password across sites
+
+TIP: Use a password manager (approved: 1Password, Bitwarden Enterprise)
+
+================================================================================
+END OF APPENDICES
+================================================================================
