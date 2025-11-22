@@ -9,3 +9,11 @@ venv/
 *.pyc
 dev.yml
 SHOPIFY.md
+
+# Promptfoo
+promptfoo/.env
+promptfoo/.cache/
+promptfoo/results/*.json
+promptfoo/results/*.html
+!promptfoo/results/.gitkeep
+node_modules/
